@@ -42,7 +42,8 @@ struct TransitStepInfo
 {
   TransitStepInfo() = default;
   TransitStepInfo(TransitType type, double distance, int time, std::string const & number = "", uint32_t color = 0,
-                  int intermediateIndex = 0);
+                  int intermediateIndex = 0, std::string const & startStopName = "",
+                  std::string const & endStopName = "");
 
   bool IsEqualType(TransitStepInfo const & ts) const;
 
@@ -60,6 +61,19 @@ struct TransitStepInfo
 
   // Is valid for TransitType::IntermediatePoint
   int m_intermediateIndex = 0;
+
+  // Boarding and alighting stop names for the detailed transit breakdown.
+  // Valid only for transit-line step types (i.e. not Pedestrian/IntermediatePoint).
+  // m_endStopName moves forward as same-line edges are merged into a single step.
+  std::string m_startStopName;
+  std::string m_endStopName;
+
+  // Names of stops the user passes through between m_startStopName and m_endStopName.
+  // Populated as same-line edges merge: each merge pushes the previous m_endStopName here.
+  std::vector<std::string> m_intermediateStopNames;
+
+  // Number of consecutive same-line edges aggregated into this step (i.e. stops ridden).
+  int m_stopCount = 0;
 };
 
 struct TransitRouteInfo
