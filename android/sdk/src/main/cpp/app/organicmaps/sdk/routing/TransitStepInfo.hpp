@@ -9,18 +9,37 @@
 jobjectArray CreateTransitStepInfoArray(JNIEnv * env, std::vector<TransitStepInfo> const & steps)
 {
   static jclass const transitStepClass = jni::GetGlobalClassRef(env, "app/organicmaps/sdk/routing/TransitStepInfo");
+  static jclass const stringClass = jni::GetGlobalClassRef(env, "java/lang/String");
   // Java signature : TransitStepInfo(int type, @Nullable String distance, @Nullable String distanceUnits,
-  //                                  int timeInSec, @Nullable String number, int color, int intermediateIndex)
-  static jmethodID const transitStepConstructor =
-      jni::GetConstructorID(env, transitStepClass, "(ILjava/lang/String;Ljava/lang/String;ILjava/lang/String;II)V");
+  //                                  int timeInSec, @Nullable String number, int color, int intermediateIndex,
+  //                                  @Nullable String startStopName, @Nullable String endStopName, int stopCount,
+  //                                  @Nullable String[] intermediateStopNames)
+  static jmethodID const transitStepConstructor = jni::GetConstructorID(
+      env, transitStepClass,
+      "(ILjava/lang/String;Ljava/lang/String;ILjava/lang/String;IILjava/lang/String;Ljava/lang/String;I[Ljava/lang/"
+      "String;)V");
 
   return jni::ToJavaArray(env, transitStepClass, steps, [&](JNIEnv * jEnv, TransitStepInfo const & stepInfo)
   {
     jni::TScopedLocalRef const distance(env, jni::ToJavaString(env, stepInfo.m_distanceStr));
     jni::TScopedLocalRef const distanceUnits(env, jni::ToJavaString(env, stepInfo.m_distanceUnitsSuffix));
     jni::TScopedLocalRef const number(env, jni::ToJavaString(env, stepInfo.m_number));
+    jni::TScopedLocalRef const startStopName(env, jni::ToJavaString(env, stepInfo.m_startStopName));
+    jni::TScopedLocalRef const endStopName(env, jni::ToJavaString(env, stepInfo.m_endStopName));
+
+    jobjectArray intermediates =
+        env->NewObjectArray(static_cast<jsize>(stepInfo.m_intermediateStopNames.size()), stringClass, nullptr);
+    for (size_t i = 0; i < stepInfo.m_intermediateStopNames.size(); ++i)
+    {
+      jni::TScopedLocalRef const name(env, jni::ToJavaString(env, stepInfo.m_intermediateStopNames[i]));
+      env->SetObjectArrayElement(intermediates, static_cast<jsize>(i), name.get());
+    }
+    jni::TScopedLocalObjectArrayRef const intermediatesRef(env, intermediates);
+
     return env->NewObject(transitStepClass, transitStepConstructor, static_cast<jint>(stepInfo.m_type), distance.get(),
                           distanceUnits.get(), static_cast<jint>(stepInfo.m_timeInSec), number.get(),
-                          static_cast<jint>(stepInfo.m_colorARGB), static_cast<jint>(stepInfo.m_intermediateIndex));
+                          static_cast<jint>(stepInfo.m_colorARGB), static_cast<jint>(stepInfo.m_intermediateIndex),
+                          startStopName.get(), endStopName.get(), static_cast<jint>(stepInfo.m_stopCount),
+                          intermediatesRef.get());
   });
 }
