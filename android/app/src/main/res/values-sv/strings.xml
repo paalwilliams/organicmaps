@@ -897,4 +897,18 @@
         <item quantity="one">%d hållplats</item>
         <item quantity="other">%d hållplatser</item>
     </plurals>
+    <!-- Tab label for the spectrum color picker mode -->
+    <string name="color_picker_spectrum">Spektrum</string>
+    <!-- Tab label for the RGB sliders color picker mode -->
+    <string name="color_picker_sliders">Skjutreglage</string>
+    <!-- Label for the red channel slider in the color picker -->
+    <string name="color_picker_red">RÖD</string>
+    <!-- Label for the green channel slider in the color picker -->
+    <string name="color_picker_green">GRÖN</string>
+    <!-- Label for the blue channel slider in the color picker -->
+    <string name="color_picker_blue">BLÅ</string>
+    <!-- Label for the hex color input field in the color picker -->
+    <string name="color_picker_hex_label">sRGB Hex färg #</string>
+    <!-- Tab label for the grid color picker mode -->
+    <string name="color_picker_grid">Rutnät</string>
 </resources>

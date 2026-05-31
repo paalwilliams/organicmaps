@@ -572,6 +572,7 @@
     <string name="type.historic.castle.shiro">Japanische Burg</string>
     <string name="type.historic.castle.stately">Schloss</string>
     <string name="type.historic.city_gate">Stadttor</string>
+    <string name="type.man_made.ceremonial_gate">Zeremonielles Tor</string>
     <string name="type.historic.citywalls">Stadtmauer</string>
     <string name="type.historic.fort">Fort</string>
     <string name="type.historic.gallows">Galgen</string>
@@ -1306,6 +1307,18 @@
     <string name="type.sport.field_hockey">Feldhockey</string>
     <string name="type.sport.badminton">Badminton</string>
     <string name="type.sport.pelota">Pelota Vasca</string>
+    <string name="type.sport.boules">Boule</string>
+    <string name="type.sport.cycling">Radsport</string>
+    <string name="type.sport.four_square">Vier-Felder-Ball</string>
+    <string name="type.sport.horse_racing">Pferderennen</string>
+    <string name="type.sport.karting">Kartsport</string>
+    <string name="type.sport.motocross">Motocross</string>
+    <string name="type.sport.motor">Motorsport</string>
+    <string name="type.sport.netball">Netball</string>
+    <string name="type.sport.pickleball">Pickleball</string>
+    <string name="type.sport.rugby_union">Rugby Union</string>
+    <string name="type.sport.running">Laufen</string>
+    <string name="type.sport.softball">Softball</string>
     <string name="type.tourism">Tourismus</string>
     <string name="type.tourism.aquarium">Aquarium</string>
     <!-- Typically serviced, staff is present and food is available (compared to wilderness_hut). -->

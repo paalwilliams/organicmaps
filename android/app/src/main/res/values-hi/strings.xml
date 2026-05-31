@@ -886,4 +886,18 @@
         <item quantity="one">%d स्टॉप</item>
         <item quantity="other">%d स्टॉप</item>
     </plurals>
+    <!-- Tab label for the spectrum color picker mode -->
+    <string name="color_picker_spectrum">स्पेक्ट्रम</string>
+    <!-- Tab label for the RGB sliders color picker mode -->
+    <string name="color_picker_sliders">स्लाइडर्स</string>
+    <!-- Label for the red channel slider in the color picker -->
+    <string name="color_picker_red">लाल</string>
+    <!-- Label for the green channel slider in the color picker -->
+    <string name="color_picker_green">हरा</string>
+    <!-- Label for the blue channel slider in the color picker -->
+    <string name="color_picker_blue">नीला</string>
+    <!-- Label for the hex color input field in the color picker -->
+    <string name="color_picker_hex_label">sRGB हेक्स रंग #</string>
+    <!-- Tab label for the grid color picker mode -->
+    <string name="color_picker_grid">ग्रिड</string>
 </resources>

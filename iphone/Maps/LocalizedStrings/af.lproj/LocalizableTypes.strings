@@ -644,6 +644,7 @@
 "type.historic.castle.shiro" = "Japanse kasteel";
 "type.historic.castle.stately" = "Landhuis";
 "type.historic.city_gate" = "Stadspoort";
+"type.man_made.ceremonial_gate" = "Seremoniepoort";
 "type.historic.citywalls" = "Stadsmuur";
 "type.historic.fort" = "Fort";
 "type.historic.gallows" = "Galg";
@@ -1446,6 +1447,18 @@
 "type.sport.field_hockey" = "Hokkie";
 "type.sport.badminton" = "Pluimbal";
 "type.sport.pelota" = "Baskiese peloton";
+"type.sport.boules" = "Boule";
+"type.sport.cycling" = "Fietsry";
+"type.sport.four_square" = "Vierkantbal";
+"type.sport.horse_racing" = "Perdewedrenne";
+"type.sport.karting" = "Karting";
+"type.sport.motocross" = "Motocross";
+"type.sport.motor" = "Motorsport";
+"type.sport.netball" = "Netbal";
+"type.sport.pickleball" = "Pickleball";
+"type.sport.rugby_union" = "Rugbyunie";
+"type.sport.running" = "Hardloop";
+"type.sport.softball" = "Sagtebal";
 "type.tourism" = "Toerisme";
 "type.tourism.aquarium" = "Aquarium";
 

@@ -899,4 +899,18 @@
         <item quantity="one">%d Station</item>
         <item quantity="other">%d Stationen</item>
     </plurals>
+    <!-- Tab label for the spectrum color picker mode -->
+    <string name="color_picker_spectrum">Spektrum</string>
+    <!-- Tab label for the RGB sliders color picker mode -->
+    <string name="color_picker_sliders">Schieberegler</string>
+    <!-- Label for the red channel slider in the color picker -->
+    <string name="color_picker_red">ROT</string>
+    <!-- Label for the green channel slider in the color picker -->
+    <string name="color_picker_green">GRÜN</string>
+    <!-- Label for the blue channel slider in the color picker -->
+    <string name="color_picker_blue">BLAU</string>
+    <!-- Label for the hex color input field in the color picker -->
+    <string name="color_picker_hex_label">sRGB Hex-Farbe #</string>
+    <!-- Tab label for the grid color picker mode -->
+    <string name="color_picker_grid">Raster</string>
 </resources>

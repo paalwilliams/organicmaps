@@ -644,6 +644,7 @@
 "type.historic.castle.shiro" = "Japanilainen linna";
 "type.historic.castle.stately" = "Arvokas linna";
 "type.historic.city_gate" = "Kaupungin portti";
+"type.man_made.ceremonial_gate" = "Seremoniallinen portti";
 "type.historic.citywalls" = "Kaupungin muuri";
 "type.historic.fort" = "Linnake";
 "type.historic.gallows" = "Hirsipuu";
@@ -1446,6 +1447,18 @@
 "type.sport.field_hockey" = "Maahockey";
 "type.sport.badminton" = "Sulkapallo";
 "type.sport.pelota" = "Baskimaan pelota";
+"type.sport.boules" = "Petankki";
+"type.sport.cycling" = "Pyöräily";
+"type.sport.four_square" = "Neljä ruutua";
+"type.sport.horse_racing" = "Hevoskilpailut";
+"type.sport.karting" = "Karting";
+"type.sport.motocross" = "Motocross";
+"type.sport.motor" = "Moottoriurheilu";
+"type.sport.netball" = "Netball";
+"type.sport.pickleball" = "Pickleball";
+"type.sport.rugby_union" = "Rugby union";
+"type.sport.running" = "Juoksu";
+"type.sport.softball" = "Softball";
 "type.tourism" = "Turismi";
 "type.tourism.aquarium" = "Akvaario";
 

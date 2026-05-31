@@ -886,4 +886,18 @@
     <plurals name="transit_stops_count">
         <item quantity="other">%d 정거장</item>
     </plurals>
+    <!-- Tab label for the spectrum color picker mode -->
+    <string name="color_picker_spectrum">스펙트럼</string>
+    <!-- Tab label for the RGB sliders color picker mode -->
+    <string name="color_picker_sliders">슬라이더</string>
+    <!-- Label for the red channel slider in the color picker -->
+    <string name="color_picker_red">빨강</string>
+    <!-- Label for the green channel slider in the color picker -->
+    <string name="color_picker_green">초록</string>
+    <!-- Label for the blue channel slider in the color picker -->
+    <string name="color_picker_blue">BLUE</string>
+    <!-- Label for the hex color input field in the color picker -->
+    <string name="color_picker_hex_label">sRGB 16진수 색상 #</string>
+    <!-- Tab label for the grid color picker mode -->
+    <string name="color_picker_grid">그리드</string>
 </resources>

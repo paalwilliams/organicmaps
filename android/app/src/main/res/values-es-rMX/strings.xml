@@ -501,4 +501,6 @@
         <item quantity="one">%d parada</item>
         <item quantity="other">%d paradas</item>
     </plurals>
+    <!-- Label for the hex color input field in the color picker -->
+    <string name="color_picker_hex_label">Color hexadecimal sRGB #</string>
 </resources>

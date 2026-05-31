@@ -647,4 +647,8 @@
         <item quantity="one">%d parada</item>
         <item quantity="other">%d paradas</item>
     </plurals>
+    <!-- Tab label for the RGB sliders color picker mode -->
+    <string name="color_picker_sliders">Controles deslizantes</string>
+    <!-- Tab label for the grid color picker mode -->
+    <string name="color_picker_grid">Grade</string>
 </resources>

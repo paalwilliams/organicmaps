@@ -644,6 +644,7 @@
 "type.historic.castle.shiro" = "Castelo japonês";
 "type.historic.castle.stately" = "Château";
 "type.historic.city_gate" = "Portas da cidade";
+"type.man_made.ceremonial_gate" = "Portão Cerimonial";
 "type.historic.citywalls" = "Muralha";
 "type.historic.fort" = "Forte";
 "type.historic.gallows" = "Forca";
@@ -1446,6 +1447,18 @@
 "type.sport.field_hockey" = "Hóquei em campo";
 "type.sport.badminton" = "Badminton";
 "type.sport.pelota" = "Pelota basca";
+"type.sport.boules" = "Petanca";
+"type.sport.cycling" = "Ciclismo";
+"type.sport.four_square" = "Quatro quadrados";
+"type.sport.horse_racing" = "Corridas de cavalos";
+"type.sport.karting" = "Karting";
+"type.sport.motocross" = "Motocross";
+"type.sport.motor" = "Desporto motorizado";
+"type.sport.netball" = "Netebol";
+"type.sport.pickleball" = "Pickleball";
+"type.sport.rugby_union" = "Râguebi";
+"type.sport.running" = "Corrida";
+"type.sport.softball" = "Softbol";
 "type.tourism" = "Turismo";
 "type.tourism.aquarium" = "Aquário";
 

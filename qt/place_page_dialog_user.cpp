@@ -1,13 +1,11 @@
 #include "qt/place_page_dialog_user.hpp"
-#include "qt/place_page_dialog_common.hpp"
 
 #include "qt/qt_common/text_dialog.hpp"
 
 #include "indexer/validate_and_format_contacts.hpp"
 #include "map/place_page_info.hpp"
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -54,11 +52,13 @@ public:
   }
 };
 
-PlacePageDialogUser::PlacePageDialogUser(QWidget * parent, place_page::Info const & info) : QDialog(parent)
+PlacePageDialogUser::PlacePageDialogUser(QWidget * parent, qt::DrawWidget * drawWidget, place_page::Info const & info)
+  : PlacePageDialogCommon(parent, drawWidget, info)
 {
+  using namespace place_page_dialog;
   auto const & title = info.GetTitle();
+  QVBoxLayout * contentLayout = GetContentLayout();
 
-  QVBoxLayout * layout = new QVBoxLayout();
   {
     QVBoxLayout * header = new QVBoxLayout();
 
@@ -83,37 +83,18 @@ PlacePageDialogUser::PlacePageDialogUser(QWidget * parent, place_page::Info cons
       header->addWidget(addressLabel);
     }
 
-    layout->addLayout(header);
+    contentLayout->addLayout(header);
   }
 
-  {
-    QHLine * line = new QHLine();
-    layout->addWidget(line);
-  }
+  contentLayout->addWidget(new QHLine());
 
   {
     QGridLayout * data = new QGridLayout();
 
     int row = 0;
 
-    auto const addEntry = [data, &row](std::string const & key, std::string const & value, bool isLink = false)
-    {
-      data->addWidget(new QLabel(QString::fromStdString(key)), row, 0);
-      QLabel * label = new QLabel(QString::fromStdString(value));
-      label->setTextInteractionFlags(Qt::TextSelectableByMouse);
-      label->setWordWrap(true);
-      if (isLink)
-      {
-        label->setOpenExternalLinks(true);
-        label->setTextInteractionFlags(Qt::TextBrowserInteraction);
-        label->setText(QString::fromStdString("<a href=\"" + value + "\">" + value + "</a>"));
-      }
-      data->addWidget(label, row++, 1);
-      return label;
-    };
-
     if (info.IsBookmark())
-      addEntry("Bookmark", "Yes");
+      addEntry(data, row, "Bookmark", "Yes");
 
     // Wikipedia fragment
     if (auto const & wikipedia = info.GetMetadata(feature::Metadata::EType::FMD_WIKIPEDIA); !wikipedia.empty())
@@ -148,19 +129,15 @@ PlacePageDialogUser::PlacePageDialogUser(QWidget * parent, place_page::Info cons
       data->addWidget(wikiButton, row++, 0, 1, 2, Qt::AlignLeft);
     }
 
-    /// @todo Use a combo box like the developer dialog once the place page becomes
-    /// a non-modal floating/dockable window.
-    // Route refs
-    if (auto routes = info.FormatRouteRefs(); !routes.empty())
-      addEntry("Routes", routes);
+    addRoutesRow(data, row, drawWidget, info);
 
     // Opening hours fragment
     if (auto openingHours = info.GetOpeningHours(); !openingHours.empty())
-      addEntry("Opening hours", std::string(openingHours));
+      addEntry(data, row, "Opening hours", std::string(openingHours));
 
     // Cuisine fragment
     if (auto cuisines = info.FormatCuisines(); !cuisines.empty())
-      addEntry("Cuisine", cuisines);
+      addEntry(data, row, "Cuisine", cuisines);
 
     // Entrance fragment
     // TODO
@@ -179,15 +156,15 @@ PlacePageDialogUser::PlacePageDialogUser(QWidget * parent, place_page::Info cons
 
     // Operator fragment
     if (auto operatorName = info.GetMetadata(feature::Metadata::EType::FMD_OPERATOR); !operatorName.empty())
-      addEntry("Operator", std::string(operatorName));
+      addEntry(data, row, "Operator", std::string(operatorName));
 
     // Wifi fragment
     if (info.HasWifi())
-      addEntry("Wi-Fi", "Yes");
+      addEntry(data, row, "Wi-Fi", "Yes");
 
     // Links fragment
     if (auto website = info.GetMetadata(feature::Metadata::EType::FMD_WEBSITE); !website.empty())
-      addEntry("Website", std::string(stripSchemeFromURI(website)), true);
+      addEntry(data, row, "Website", std::string(stripSchemeFromURI(website)), true);
 
     if (auto email = info.GetMetadata(feature::Metadata::EType::FMD_EMAIL); !email.empty())
     {
@@ -240,40 +217,24 @@ PlacePageDialogUser::PlacePageDialogUser(QWidget * parent, place_page::Info cons
 
     // Level fragment
     if (auto level = info.GetMetadata(feature::Metadata::EType::FMD_LEVEL); !level.empty())
-      addEntry("Level", std::string(level));
+      addEntry(data, row, "Level", std::string(level));
 
     // ATM fragment
     if (info.HasAtm())
-      addEntry("ATM", "Yes");
+      addEntry(data, row, "ATM", "Yes");
 
     // Latlon fragment
-
     {
       ms::LatLon const ll = info.GetLatLon();
-      addEntry("Coordinates", strings::to_string_dac(ll.m_lat, 7) + ", " + strings::to_string_dac(ll.m_lon, 7));
+      addEntry(data, row, "Coordinates",
+               strings::to_string_dac(ll.m_lat, 7) + ", " + strings::to_string_dac(ll.m_lon, 7));
     }
 
     data->setColumnStretch(0, 0);
     data->setColumnStretch(1, 1);
 
-    layout->addLayout(data);
+    contentLayout->addLayout(data);
   }
 
-  layout->addStretch();
-
-  {
-    QHLine * line = new QHLine();
-    layout->addWidget(line);
-  }
-
-  {
-    QDialogButtonBox * dbb = new QDialogButtonBox();
-    place_page_dialog::addCommonButtons(this, dbb, info.ShouldShowEditPlace());
-    layout->addWidget(dbb, Qt::AlignCenter);
-  }
-
-  setLayout(layout);
-
-  auto const ppTitle = std::string("Place Page") + (info.IsBookmark() ? " (bookmarked)" : "");
-  setWindowTitle(ppTitle.c_str());
+  contentLayout->addStretch();
 }
