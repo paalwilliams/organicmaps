@@ -83,7 +83,10 @@
   auto const rulerOffset =
       m2::PointF(frame.origin.x * vs, (frame.origin.y + frame.size.height - viewHeight - kRulerAdditionalYOffset) * vs);
   auto const kCompassAdditionalYOffset = [TrackRecordingManager.shared isActive] ? 50 : 0;
-  auto const compassOffset = m2::PointF((frame.origin.x + frame.size.width - viewWidth) * vs,
+  // Map controls are mirrored in RTL, so the compass moves to the left to not overlap the layers button.
+  BOOL const isRTL =
+      UIApplication.sharedApplication.userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
+  auto const compassOffset = m2::PointF((isRTL ? frame.origin.x : frame.origin.x + frame.size.width - viewWidth) * vs,
                                         (frame.origin.y + kCompassAdditionalYOffset) * vs);
   m_skin->ForEach([&](gui::EWidget w, gui::Position const & pos)
   {
@@ -92,7 +95,11 @@
     {
     case gui::WIDGET_RULER:
     case gui::WIDGET_COPYRIGHT: pivot += rulerOffset; break;
-    case gui::WIDGET_COMPASS: pivot += compassOffset; break;
+    case gui::WIDGET_COMPASS:
+      if (isRTL)
+        pivot.x = viewWidth * vs - pivot.x;
+      pivot += compassOffset;
+      break;
     case gui::WIDGET_SCALE_FPS_LABEL:
     case gui::WIDGET_CHOOSE_POSITION_MARK: break;
     }
